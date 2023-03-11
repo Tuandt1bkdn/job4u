@@ -4,12 +4,16 @@ import {
   faSquarePhoneFlip,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <div className="w-full h-20  flex flex-row justify-center items-center border-solid border-b">
       <div className="w-[70%] h-20  flex flex-row justify-between items-center">
-        <div className="w-[40%] h-[100%]  text-red-700 flex flex-row items-center ">
+        <div
+          className="w-[40%] h-[100%]  text-red-700 flex flex-row items-center cursor-pointer "
+          onClick={() => navigate("/")}>
           <img
             src="https://www.job4u.rs/wp-content/uploads/2018/01/final5logo-NOVO.png"
             alt="Job4U"

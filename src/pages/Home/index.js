@@ -1,47 +1,50 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { useState } from "react";
+import SearchBox from "../../components/SearchBox";
 
 function Home() {
-  const majors = ["Văn phòng", "Marketing", "CSKH"];
+  const blog = [
+    {
+      title: "Xử lý bất đồng bộ với Promise.all trong JavaScript",
+      shortDecription:
+        "Anh em lập trình viên JavaScript chắc không xa lạ gì với Promise hay async/await trong việc xử lý các [...]",
+      time: "9 days ago",
+    },
+    {
+      title: "Kiến trúc hệ thống là gì?",
+      shortDecription:
+        "Với 1 hệ thống bất kỳ, việc xây dựng kiến trúc luôn là bước đầu tiên và quan trọng nhất quyết định tính khả thi của cả ...",
+      time: "9 days ago",
+    },
+    {
+      title: "Tổng hợp 5 xu hướng dẫn dắt “làn sóng” công nghệ trong năm 2023",
+      shortDecription:
+        "Công nghệ ngày càng phát triển với nhịp độ nhanh và cải tiến không ngừng. Cập nhật và đón đầu các xu hướng công nghệ mớ...",
+      time: "11 days ago",
+    },
+    {
+      title:
+        "Embedded Developer là gì? Cần học gì để trở thành Embedded Developer",
+      shortDecription:
+        "Những năm trở lại đây, cứ nhắc đến công nghệ là người ta lại nhắc đến 4.0, nhắc đến IoT, smartthing, … Với lĩnh vực [....]",
+      time: "11 days ago",
+    },
+    {
+      title:
+        "Năm 2022 rực rỡ tại EPAM Vietnam – Hiện thực hoá tương lai từ nguồn lực nhân sự mạnh mẽ",
+      shortDecription:
+        "Vào tháng 12 vừa qua, EPAM chính thức kỉ niệm 3 năm thành lập với nhiều sự tăng trưởng mới tại thị trường Việt Nam. EPA...",
+      time: "12 days ago",
+    },
+    {
+      title: "9 project nhỏ mà bạn có thể code để luyện tập kỹ năng lập trình",
+      shortDecription:
+        "Bài viết được cho phép bởi tác giả Phạm Huy Hoàng Hôm trước, mình có giới thiệu về JavaScript, đánh giá nó là [...]",
+      time: "15 days ago",
+    },
+  ];
   return (
-    <div class=" bg-white h-screen flex flex-col items-center">
-      <div className="w-[70%] h-[140px]  mt-[20px] border border-solid border-[#d34126] flex flex-col justify-center">
-        <div className="w-[100%] h-[50%] flex flex-row items-center justify-between border-[#d34126] border-solid border-b">
-          <div className="ml-[5px] w-[69%] h-[75%] border border-solid border-stone-300 flex flex-row justify-start items-center">
-            <FontAwesomeIcon
-              icon={faSearch}
-              className="mx-[10px] text-stone-500"
-            />
-            <input
-              type="text"
-              placeholder="Nhập từ khoá tìm kiếm"
-              className="w-[200px] h-[20px] p-[5px] outline-none "
-            />
-          </div>
-          <form className="w-[19%] h-[75%]  border border-solid border-stone-300 flex flew-row justify-center items-center">
-            <select className="w-[85%] h-[100%] outline-none text-stone-500">
-              <option>Tất cả địa điểm</option>
-              <option>Hà Nội</option>
-              <option>TP Hồ Chí Minh</option>
-              <option>TP Đà Nẵng</option>
-            </select>
-          </form>
-          <div className="w-[9%] h-[100%] bg-[#d34126] text-white flex flew-row justify-center items-center text-[17px]">
-            Tìm kiếm
-          </div>
-        </div>
-        <div className="w-[100%] h-[50%] flex flex-row justify-start items-center">
-          {majors.map((item, index) => (
-            <div
-              key={index}
-              className="border border-solid border-stone-500 p-[5px] mx-[5px] text-[13px] text-black">
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <div class=" bg-white min-h-screen flex flex-col items-center">
+      {/* SearchBox */}
+      <SearchBox />
       {/* Cong ty noi bat  */}
 
       <div className="w-[70%] h-[350px]  mt-[25px] flex flex-row justify-between items-center font-sans">
@@ -102,7 +105,40 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-[200px] bg-[#efefef] mt-[40px] flex flex-col "></div>
+      <div className="w-full h-[200px] bg-[#efefef] mt-[40px] flex flex-row justify-start">
+        <div className="w-[15%] h-full"></div>
+        <div className="w-[70%] h-full flex flex-col items-start">
+          <p className="text-[20px] font-semibold text-black mt-[20px]">
+            Nhà tuyển dụng nổi bật
+          </p>
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+        <div className="w-[15%] h-full"></div>
+      </div>
+      <div className="w-[70%] min-h-[600px] mt-[50px]  flex flex-col items-start">
+        <h2 className="text-[20px] font-semibold">Blog việc làm</h2>
+        <div className="w-[100%]  flex  mt-[20px] flex-row flex-wrap justify-between items-start">
+          {blog.map((item, index) => (
+            <div
+              key={index}
+              className="w-[19%] h-[450px] border border-[#cdcdcd] flex flex-col justify-start items-start relative">
+              <div className="my-[10px] w-[100%] h-[35%] bg-red-300 cursor-pointer"></div>
+              <p className="text-[18px] font-semibold mt-[5px] text-left cursor-pointer">
+                {item.title}
+              </p>
+              <p className="absolute top-[280px] text-[15px] mt-[20px] text-left">
+                {item.shortDecription}
+              </p>
+              <span className="w-[100%] text-[13px] absolute bottom-2 flex flex-row justify-between">
+                <p className="text-[#d34127]">Read more</p>
+                <p className="text-[#666666]">{item.time}</p>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

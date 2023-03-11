@@ -2,13 +2,19 @@
 import Footer from "../Footer";
 import Header from "../Header";
 import Navbar from "../Navbar";
+//import SavedJob from "../SavedJobFixedCSS";
 
-function DefaultLayout({ children }) {
+function DefaultLayout({ children, savedtable }) {
   return (
-    <div class="w-full h-full">
+    <div className="w-full min-h-full flex flex-col">
+      {/* <!-- Header -->  */}
       <Header />
+      {/* <!-- Narbar -->  */}
       <Navbar />
-      <div class="w-full h-[1000px] bg-white">{children}</div>
+      <>{savedtable}</>
+      <div className="w-full min-h-screen bg-white flex flex-row justify-center">
+        {children}
+      </div>
       <Footer />
     </div>
   );
