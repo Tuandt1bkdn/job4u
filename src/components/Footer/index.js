@@ -1,3 +1,9 @@
+import {
+  faFacebookSquare,
+  faGithub,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FooterComponent from "./FooterComponent";
 
 function Footer() {
@@ -50,6 +56,23 @@ function Footer() {
       <FooterComponent list={list1} listName="Về Job4U" />
       <FooterComponent list={list2} listName="Ứng viên" />
       <FooterComponent list={list3} listName="Nhà tuyển dụng" />
+      <div className="w-[12%] min-h-[200px] mt-[25px] flex flex-col justify-start items-start text-left ml-[10px] text-[#393e46]">
+        <p className="text-[15px] font-medium">Theo dõi chúng tôi tại</p>
+        <div className="flex flex-row justify-start pt-[4px]">
+          <FontAwesomeIcon
+            icon={faFacebookSquare}
+            className=" text-[50px] pr-[20px] hover:text-[#fd7e14] cursor-pointer "
+          />
+          <FontAwesomeIcon
+            icon={faGithub}
+            className=" text-[50px] pr-[20px] hover:text-[#fd7e14] cursor-pointer "
+          />
+          <FontAwesomeIcon
+            icon={faYoutube}
+            className=" text-[50px] hover:text-[#fd7e14] cursor-pointer "
+          />
+        </div>
+      </div>
     </div>
   );
 }

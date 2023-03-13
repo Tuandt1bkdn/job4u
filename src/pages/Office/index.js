@@ -1,12 +1,9 @@
-/* eslint-disable array-callback-return */
 import SearchBox from "../../components/SearchBox";
 import { useEffect, useState } from "react";
-import axios from "axios";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-// import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+
 import "./index.css";
 import JobPageContent from "../../components/JobPageContent";
+import { GetOfficeJobs } from "../../API/Services/GET";
 
 function OfficePage() {
   const [job, setJob] = useState([]);
@@ -27,8 +24,7 @@ function OfficePage() {
 
   //Call API
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/officejob")
+    GetOfficeJobs()
       .then((res) => {
         setJob(res.data);
       })

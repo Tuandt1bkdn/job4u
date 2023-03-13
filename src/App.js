@@ -6,10 +6,11 @@ import DefaultLayout from "./components/DefaultLayout";
 import Feature1 from "./pages/Feature1";
 import OfficePage from "./pages/Office";
 import MarketingPage from "./pages/MarketingJob";
-import CustomerCarePage from "./pages/CustomerCarePage";
+//import CustomerCarePage from "./pages/CustomerCarePage";
 import Hiring from "./pages/Hiring";
 import AllJobs from "./pages/AllJob";
 import SavedJob from "../src/components/SavedJobFixedCSS";
+import Feature2 from "./pages/Feature2";
 
 function App() {
   return (
@@ -38,7 +39,6 @@ function App() {
             element={
               <DefaultLayout>
                 <SavedJob />
-                <CustomerCarePage />
               </DefaultLayout>
             }
           />
@@ -69,6 +69,7 @@ function App() {
             }
           />
           <Route path="/feature1" element={<Feature1 />} />
+          <Route path="/feature2" element={<Feature2 />} />
         </Routes>
       </div>
     </Router>

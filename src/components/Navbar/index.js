@@ -43,10 +43,16 @@ function Navbar() {
             <li className="cursor-pointer">Blog</li>
             <li
               className="cursor-pointer"
-              onClick={() => navigate("/feature1")}>
+              //onClick={() => navigate("/feature1")}>
+            >
               Tính năng 1
             </li>
-            <li className="cursor-pointer">Tính năng 2</li>
+            <li
+              className="cursor-pointer"
+              //onClick={() => navigate("/feature2")}>
+            >
+              Tính năng 2
+            </li>
           </ul>
         </div>
         <div className="w-[28%] h-full  flex flex-row justify-between items-center text-white text-[17px]">

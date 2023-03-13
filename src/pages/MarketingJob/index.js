@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { GetMarketingJobs } from "../../API/Services/GET";
 import JobPageContent from "../../components/JobPageContent";
 import SearchBox from "../../components/SearchBox";
 
@@ -7,8 +7,7 @@ function MarketingPage() {
   const [marketingJobs, setMarketingJobs] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/marketingjob")
+    GetMarketingJobs()
       .then((res) => setMarketingJobs(res.data))
       .catch((e) => {
         throw e;

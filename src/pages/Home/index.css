@@ -1,0 +1,14 @@
+#spotlightJob>div:last-child{
+    border-bottom: 1px solid #e5e7eb;
+}
+#hrspotlight{
+    width: 1356px;
+    /* background-color: red; */
+    /* width: max-content; */
+    overflow:auto;
+    margin: 24px auto;
+}
+#hrspotlight::-webkit-scrollbar{
+    display: none;
+}
+

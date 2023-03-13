@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxArchive, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
+import { GetSavedJobs } from "../../API/Services/GET";
+import "./index.css";
 
 function SavedJob() {
   //
@@ -10,8 +12,7 @@ function SavedJob() {
   const [savedJobs, setSavedJob] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/savedjob")
+    GetSavedJobs()
       .then((res) => setSavedJob(res.data))
       .catch((e) => {
         throw e;
@@ -33,13 +34,13 @@ function SavedJob() {
       </div>
       {/* Saved Job Box  */}
       {showSavedJob ? (
-        <div
-          id="savedjob"
-          className="fixed rounded-[15px] shadow-xl bottom-[80px] right-[30px] w-[300px] h-[400px] bg-white border border-[#f0f0f0] ">
+        <div className="fixed rounded-[15px] shadow-xl bottom-[80px] right-[30px] w-[300px] h-[400px] bg-white border border-[#f0f0f0] ">
           <p className="h-[40px] text-[20px] text-[#393e46] mt-[10px] ">
             Bài đăng đã lưu
           </p>
-          <div className="h-[340px] w-[100%] bg-white overflow-y-scroll  ">
+          <div
+            className="h-[340px] w-[100%] bg-white overflow-y-scroll  "
+            id="savedjob">
             {savedJobs.map((savedJob, index) => (
               <div
                 key={index}
