@@ -1,8 +1,19 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import Context from "../../store/Context";
+import { Fragment, useContext } from "react";
+import Tippy from "@tippyjs/react/headless";
+import { GoogleLogout, GoogleLogin } from "react-google-login";
+import { setLogin, setInfo } from "../../store/actions";
+
+const clientId =
+  "104319102501-h53nqs7514f4mh3sq3bhrr8fb7ahobsn.apps.googleusercontent.com";
 
 function Navbar() {
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(Context);
+
   const navigate = useNavigate();
 
   const handleHoverMenu = () => {
@@ -19,9 +30,24 @@ function Navbar() {
     tag3.style.width = "23px";
   };
 
+  const onSuccess = (res) => {
+    console.log("Login Successful ! Current User : ", res.profileObj);
+    dispatch(setLogin(true));
+    dispatch(setInfo(res.profileObj));
+    console.log(state);
+  };
+  const onFailure = (res) => {
+    console.log("Login Failed ! ", res);
+  };
+
+  const onLogoutSuccess = () => {
+    dispatch(setLogin(false));
+    window.location.reload();
+  };
+
   return (
     <div className="w-full h-20 bg-[#212529] sticky top-0 flex flex-row justify-center items-center z-10">
-      <div className="w-[70%] h-[80%]  flex flex-row justify-between items-center ">
+      <div className="w-[65%] h-[80%]  flex flex-row justify-between items-center ">
         <div className="w-[60%] h-full flex flex-row items-center justify-between">
           <span
             className=" w-[70px] h-[70%]  ml-2 flex flex-col items-start justify-center"
@@ -49,25 +75,115 @@ function Navbar() {
             </li>
             <li
               className="cursor-pointer"
-              //onClick={() => navigate("/feature2")}>
-            >
+              onClick={() => navigate("/feature2")}>
               Tính năng 2
             </li>
           </ul>
         </div>
-        <div className="w-[28%] h-full  flex flex-row justify-between items-center text-white text-[17px]">
-          <div
-            className="w-[50%] h-[70%] bg-orange-500   flex flex-row justify-center items-center cursor-pointer"
-            onClick={() => navigate("/tuyendung")}>
-            <p>Đăng tuyển</p>
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              className=" font-semibold mx-[10px]"
-            />
-          </div>
-          <div className="w-[40%] h-[70%] border border-white border-solid flex flex-row justify-center items-center cursor-pointer">
-            <p>Đăng nhập</p>
-          </div>
+        <div className="w-[28%] h-full  flex flex-row justify-end items-center text-white text-[17px]">
+          <GoogleLogin
+            //className=" hover:opacity-[0.1]"
+            clientId={clientId}
+            // buttonText="Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            isSignedIn={true}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                style={{
+                  width: "90%",
+                  height: "45px",
+                  borderRadius: "4px",
+                  border: "1px",
+                  borderColor: "#cbd5e1",
+                  borderStyle: "solid",
+                  //display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "black",
+                  marginTop: "30px",
+                  display: "none",
+                }}>
+                <img
+                  alt="logogoogle"
+                  src="https://img.icons8.com/color/512/google-logo.png"
+                  className="w-[30px] h-auto mx-[5px]"
+                />
+                <p className="mx-[5px] font-medium"> GOOGLE</p>
+              </button>
+            )}
+            cookiePolicy={"single_host_origin"}>
+            GOOGLE
+          </GoogleLogin>
+          {state.login ? (
+            <Fragment>
+              <p>Xin chào, &nbsp;</p>
+              <Tippy
+                interactive
+                placement="bottom-end"
+                render={(attrs) => (
+                  <div
+                    className="w-[255px] h-[200px] bg-[#e8e8e8] mt-[20px] flex flex-col justify-start items-start"
+                    {...attrs}>
+                    <div className="w-[100%] pl-[20px] h-[20%] border-b text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                      Bảng điều khiển
+                    </div>
+                    <div className="w-[100%] pl-[20px] h-[20%] border-b text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                      Công việc đang theo dõi
+                    </div>
+                    <div className="w-[100%] pl-[20px] h-[20%] border-b text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                      Blog đang theo dõi
+                    </div>
+                    <div
+                      onClick={() => navigate("/tuyendung")}
+                      className="w-[100%] pl-[20px] h-[20%] border-b text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                      Đăng tuyển
+                    </div>
+
+                    <GoogleLogout
+                      clientId={clientId}
+                      onLogoutSuccess={onLogoutSuccess}
+                      render={(renderProps) => (
+                        <div
+                          onClick={renderProps.onClick}
+                          className="w-[100%] pl-[20px] h-[20%]  text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                          Đăng xuất
+                        </div>
+                      )}></GoogleLogout>
+                  </div>
+                )}>
+                <span>
+                  {" "}
+                  {state.information.name}{" "}
+                  <FontAwesomeIcon
+                    icon={faCaretDown}
+                    className="text-[18px] text-white "
+                  />
+                </span>
+              </Tippy>
+            </Fragment>
+          ) : (
+            <>
+              <div
+                className="w-[50%] h-[70%] bg-[#d34127] mr-[30px]  flex flex-row justify-center items-center cursor-pointer"
+                onClick={() => navigate("/tuyendung")}>
+                <p>Đăng tuyển</p>
+                <FontAwesomeIcon
+                  icon={faArrowRight}
+                  className=" font-semibold mx-[10px]"
+                />
+              </div>
+              <div
+                onClick={() => {
+                  state.login ? navigate("/") : navigate("/login");
+                }}
+                className="w-[40%] h-[70%] border border-white border-solid flex flex-row justify-center items-center cursor-pointer">
+                <p>Đăng nhập</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@ function Hiring() {
   };
 
   return (
-    <div className="w-[100%] min-h-[1000px] bg-slate-300 flex flex-row justify-center">
+    <div className="w-[100%] min-h-[1000px] mb-[-35px] bg-slate-300 flex flex-row justify-center">
       <div className="w-[70%] h-[900px] bg-white mt-[50px] flex flex-row justify-center">
         <div className="w-[55%] h-[90%]  mt-[40px] flex flex-col items-start">
           <p className="text-left text-[25px]">

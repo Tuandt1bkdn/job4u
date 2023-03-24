@@ -1,6 +1,6 @@
 function HrSpotlight({ logo, name }) {
   return (
-    <div className="w-[200px] h-[150px]  flex flex-col justify-between mx-[12px]">
+    <div className="w-[200px] h-[150px]  flex flex-col justify-between mx-[12px] absolute">
       <div className="w-[200px] h-[100px] bg-white flex justify-center items-center">
         <img alt="" src={logo} className="h-[50px] w-auto" />
       </div>

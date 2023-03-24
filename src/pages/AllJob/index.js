@@ -1,13 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+//import axios from "axios";
+import { useEffect, useState, useContext } from "react";
+import { GetAllJobs } from "../../API/Services/GET";
 import JobPageContent from "../../components/JobPageContent";
 import SearchBox from "../../components/SearchBox";
+import Context from "../../store/Context";
 
 function AllJobs() {
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(Context);
+  console.log("state", state);
   const [allJob, setAllJob] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/alljob")
+    GetAllJobs()
       .then((res) => setAllJob(res.data))
       .catch((e) => {
         throw e;

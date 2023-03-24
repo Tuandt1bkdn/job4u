@@ -1,24 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-import axios from "axios";
+import Highlight from "../Highlight";
+import { AddSavedJob } from "../../API/Services/POST";
+import { useContext } from "react";
+import Context from "../../store/Context";
 
 function JobPageContent({ jobdata, jobtype }) {
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(Context);
+
   const handleSavedJob = (item) => {
     const body = {
       CompanyName: item.CompanyName,
       JobName: item.JobName,
       Address: item.Address,
-      AccountID: "tuanqb12",
+      AccountID: state.information.email,
       idJob: item.idJob,
     };
-    axios.post("http://localhost:5000/savedjob", body).then();
-    //console.log(item);
+    AddSavedJob(body).then().catch();
   };
 
   return (
     <>
-      <div className="w-[70%] min-h-[1000px] mt-[20px]">
+      <div className="w-[65%] min-h-[1000px] mt-[20px] ">
         {/* So viec lam tim thay  */}
 
         <div className="w-[100%] h-[50px] border border-slate-200 flex flex-row items-center ">
@@ -33,12 +38,12 @@ function JobPageContent({ jobdata, jobtype }) {
         </div>
 
         {/* Thong tin viec lam */}
-        <div className="w-[100%] min-h-[1000px mt-[20px]">
-          <div className="w-[70%] min-h-[1000px] ">
+        <div className="w-[100%] min-h-[1000px mt-[20px] flex flex-row justify-between ">
+          <div className="w-[75%] min-h-[1000px] border-t-[2px] border-t-[#b1b1b1] border-b border-x border-slate-300  ">
             {jobdata.map((item, index) => (
               <div
                 key={index}
-                className=" w-[100%] min-h-[50px] border-t-[2px] border-x border-[#b1b1b1] flex flex-row justify-between bg-gradient-to-r from-[#f7d4d3]  to-[#f7e9e0]">
+                className=" w-[100%] min-h-[50px] border-b-[2px] border-[#b1b1b1] flex flex-row justify-between bg-gradient-to-r from-[#f7d4d3]  to-[#f7e9e0]">
                 <div className="w-[20%] h-[100px] flex flex-row justify-center items-center mt-[10px]">
                   <img
                     alt=""
@@ -72,6 +77,9 @@ function JobPageContent({ jobdata, jobtype }) {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="w-[24%] min-h-[400px]">
+            <Highlight />
           </div>
         </div>
         {/* Het thong tin Viec lam  */}

@@ -2,3 +2,12 @@
     display: block;
     transition: linear 3s;
 }
+@keyframes test {
+    0% { transform: ();}
+    50% { background-color: blue;}
+    100% { background: green;}
+}
+
+#test{
+    animation: test linear infinite 2s
+}

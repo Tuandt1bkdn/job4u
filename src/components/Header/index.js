@@ -10,7 +10,7 @@ function Header() {
   const navigate = useNavigate();
   return (
     <div className="w-full h-20  flex flex-row justify-center items-center border-solid border-b">
-      <div className="w-[70%] h-20  flex flex-row justify-between items-center">
+      <div className="w-[65%] h-20  flex flex-row justify-between items-center">
         <div
           className="w-[40%] h-[100%]  text-red-700 flex flex-row items-center cursor-pointer "
           onClick={() => navigate("/")}>
@@ -34,6 +34,7 @@ function Header() {
           </div>
           <div className="h-[30%] bg-white flex flex-row justify-center items-center text-[15px]  ">
             <FontAwesomeIcon icon={faBriefcase} className="ml-3" />
+
             <p className="pr-2 pl-2">Dang tuyen</p>
           </div>
         </div>

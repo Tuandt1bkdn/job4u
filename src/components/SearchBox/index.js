@@ -17,7 +17,7 @@ function SearchBox() {
   //   navigate(link);
   // };
   return (
-    <div className="w-[70%] h-[140px]  mt-[20px] border border-solid border-[#d34126] flex flex-col justify-center">
+    <div className="w-[65%] h-[140px]  mt-[20px] border border-solid border-[#d34126] flex flex-col justify-center">
       <div className="w-[100%] h-[50%] flex flex-row items-center justify-between border-[#d34126] border-solid border-b">
         <div className="ml-[5px] w-[69%] h-[75%] border border-solid border-stone-300 flex flex-row justify-start items-center">
           <FontAwesomeIcon

@@ -2,13 +2,16 @@
     border-bottom: 1px solid #e5e7eb;
 }
 #hrspotlight{
-    width: 1356px;
+    width: 1200px;
     /* background-color: red; */
     /* width: max-content; */
-    overflow:auto;
-    margin: 24px auto;
+    overflow:hidden;
+    /* margin: 24px auto; */
 }
 #hrspotlight::-webkit-scrollbar{
     display: none;
 }
 
+.item{
+    transition: 0.5s;
+}

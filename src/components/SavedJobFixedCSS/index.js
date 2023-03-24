@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBoxArchive, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-//import axios from "axios";
+import {
+  faBoxArchive,
+  faDeleteLeft,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect, useState } from "react";
+
 import { GetSavedJobs } from "../../API/Services/GET";
+import { DeleteSavedJob } from "../../API/Services/DELETE";
 import "./index.css";
+import Context from "../../store/Context";
 
 function SavedJob() {
   //
@@ -11,16 +17,23 @@ function SavedJob() {
 
   const [savedJobs, setSavedJob] = useState([]);
 
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(Context);
   useEffect(() => {
-    GetSavedJobs()
+    console.log("mail", state.information.email);
+    GetSavedJobs(state.information.email)
       .then((res) => setSavedJob(res.data))
       .catch((e) => {
         throw e;
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showSavedJob]);
 
   const handleShowJobSaved = () => {
     setShowSavedJob(!showSavedJob);
+  };
+  const handleDelete = (id) => {
+    DeleteSavedJob(id).then().catch();
   };
   return (
     <>
@@ -44,7 +57,7 @@ function SavedJob() {
             {savedJobs.map((savedJob, index) => (
               <div
                 key={index}
-                className="w-[full] min-h-[60px]  flex flex-row justify-between items-center border-t border-[#f0f0f0]">
+                className="w-[full] min-h-[60px] relative flex flex-row justify-between items-center border-t border-[#f0f0f0]">
                 <img
                   className="w-[20%] h-auto object-fill ml-[5px]"
                   alt=""
@@ -65,6 +78,11 @@ function SavedJob() {
                     </p>
                   </div>
                 </div>
+                <FontAwesomeIcon
+                  icon={faDeleteLeft}
+                  className="text-slate-500 text-[15px] absolute top-[5px] right-[5px] cursor-pointer hover:text-[#d34127]"
+                  onClick={() => handleDelete(savedJob.idSavedJob)}
+                />
               </div>
             ))}
           </div>

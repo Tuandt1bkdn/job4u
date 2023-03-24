@@ -1,71 +1,33 @@
-import SearchBox from "../../components/SearchBox";
-import HrSpotlight from "../../components/Spotlight/Hr";
+//[Img]
 import logo1 from "../../logo/tma.jpg";
 import logo2 from "../../logo/mgm.jpg";
 import logo3 from "../../logo/ntt.jpg";
 import logo4 from "../../logo/lvietpostbank.jpg";
-import SpotlightJob from "../../components/Spotlight/Job";
-import blog1 from "../../logo/blog1.jpeg";
-import blog2 from "../../logo/blog2.png";
-import blog3 from "../../logo/blog3.png";
-import blog4 from "../../logo/blog4.png";
-import blog5 from "../../logo/blog5.png";
-import blog6 from "../../logo/blog6.png";
+
+//[Style]
 import "./index.css";
+
+//[Components]
+import SpotlightJob from "../../components/Spotlight/Job";
+import SearchBox from "../../components/SearchBox";
+import { blogs } from "../../static/blogs";
+
+//[Library]
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-function Home() {
-  const blog = [
-    {
-      title: "Xử lý bất đồng bộ với Promise.all trong JavaScript",
-      shortDecription:
-        "Anh em lập trình viên JavaScript chắc không xa lạ gì với Promise hay async/await trong việc xử lý các [...]",
-      time: "9 days ago",
-      blog: blog1,
-    },
-    {
-      title: "Kiến trúc hệ thống là gì?",
-      shortDecription:
-        "Với 1 hệ thống bất kỳ, việc xây dựng kiến trúc luôn là bước đầu tiên và quan trọng nhất quyết định tính khả thi của cả ...",
-      time: "9 days ago",
-      blog: blog2,
-    },
-    {
-      title: "Tổng hợp 5 xu hướng dẫn dắt “làn sóng” công nghệ trong năm 2023",
-      shortDecription:
-        "Công nghệ ngày càng phát triển với nhịp độ nhanh và cải tiến không ngừng. Cập nhật và đón đầu các xu hướng công nghệ mớ...",
-      time: "11 days ago",
-      blog: blog3,
-    },
-    {
-      title:
-        "Embedded Developer là gì? Cần học gì để trở thành Embedded Developer",
-      shortDecription:
-        "Những năm trở lại đây, cứ nhắc đến công nghệ là người ta lại nhắc đến 4.0, nhắc đến IoT, smartthing, … Với lĩnh vực [....]",
-      time: "11 days ago",
-      blog: blog4,
-    },
-    {
-      title:
-        "Năm 2022 rực rỡ tại EPAM Vietnam – Hiện thực hoá tương lai từ nguồn lực nhân sự mạnh mẽ",
-      shortDecription:
-        "Vào tháng 12 vừa qua, EPAM chính thức kỉ niệm 3 năm thành lập với nhiều sự tăng trưởng mới tại thị trường Việt Nam. EPA...",
-      time: "12 days ago",
-      blog: blog5,
-    },
-    {
-      title: "9 project nhỏ mà bạn có thể code để luyện tập kỹ năng lập trình",
-      shortDecription:
-        "Bài viết được cho phép bởi tác giả Phạm Huy Hoàng Hôm trước, mình có giới thiệu về JavaScript, đánh giá nó là [...]",
-      time: "15 days ago",
-      blog: blog6,
-    },
-  ];
 
-  const spotlightCompanys = [
+//[HOOK]
+import { useEffect, useState } from "react";
+
+function Home() {
+  // eslint-disable-next-line no-unused-vars
+  const [active, setActive] = useState(1);
+
+  // eslint-disable-next-line no-unused-vars
+  const [spotlightCompanys, setSpotlightCompanys] = useState([
     {
       img: logo1,
       name: "TMA Tech Group",
@@ -98,7 +60,7 @@ function Home() {
       img: logo4,
       name: "Liên Việt Post Bank",
     },
-  ];
+  ]);
   const spotlightJobs = [
     {
       logo: logo1,
@@ -120,12 +82,43 @@ function Home() {
     },
   ];
 
+  const loadShow = () => {
+    var listItems = document.querySelectorAll(".item");
+    console.log(listItems);
+    let stt = 0;
+    for (var i = active + 1; i < 7; i++) {
+      stt++;
+      console.log(active);
+      console.log(i);
+      listItems[i].style.transform = `translateX(${256 * stt}px)`;
+      console.log(i);
+      listItems[active - 1].style.display = "none";
+      console.log(i);
+
+      listItems[active + 5].style.display = "none";
+      listItems[active + 6].style.display = "none";
+    }
+  };
+  //const [abc, setAbc] = useState(1);
+  const nextButton = () => {
+    setActive(active + 1);
+    // let item = spotlightCompanys[0];
+    // spotlightCompanys.shift();
+    // spotlightCompanys.push(item);
+    // setSpotlightCompanys(spotlightCompanys);
+    // loadShow();
+  };
+  useEffect(() => {
+    loadShow(active);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
   return (
     <div class=" bg-white min-h-screen flex flex-col items-center">
       {/* SearchBox */}
       <SearchBox />
       {/* Cong ty noi bat  */}
-      <div className="w-[70%] h-[350px]  mt-[25px] flex flex-row justify-between items-center font-sans">
+      <div className="w-[65%] h-[350px]  mt-[25px] flex flex-row justify-between items-center font-sans">
         <div className="w-[65%] h-[90%]  flex flex-col items-start justify-between">
           <p className="text-[20px] font-semibold text-[#d34126]">
             Công ty <span className="text-[#444]">nổi bật</span>
@@ -155,8 +148,9 @@ function Home() {
             Công việc <span className="text-[#444]">nổi bật</span>
           </p>
 
-          {spotlightJobs.map((spotlightJob) => (
+          {spotlightJobs.map((spotlightJob, index) => (
             <SpotlightJob
+              key={index}
               companyName={spotlightJob.companyName}
               shortDescription={spotlightJob.jobName}
               salary={spotlightJob.salary}
@@ -166,34 +160,44 @@ function Home() {
       </div>
       {/* Tuyển dụng nổi bật  */}
       <div className="w-full min-h-[250px] bg-[#efefef] mt-[40px] flex flex-row items-center justify-center">
-        <div className="w-[5%] h-1/2 flex justify-end items-center mb-[20px] text-[35px]">
-          <FontAwesomeIcon icon={faChevronLeft} />
+        <div className="w-[7%] h-1/2 flex justify-end items-center mb-[20px] text-[35px]">
+          <FontAwesomeIcon onClick={nextButton} icon={faChevronLeft} />
         </div>
-        <div className="w-[70%] h-full flex flex-col justify-start items-start pb-[20px]">
+        <div className="w-[65%] h-full flex flex-col justify-start items-start pb-[20px]">
           <p className="text-[20px] font-semibold text-black mt-[30px]">
             Nhà tuyển dụng nổi bật
           </p>
           <div
             id="hrspotlight"
             className="mt-[20px] h-[165px] flex flex-row justify-start ">
-            {spotlightCompanys.map((spotlightCompany) => (
-              <HrSpotlight
-                logo={spotlightCompany.img}
-                name={spotlightCompany.name}
-              />
+            {spotlightCompanys.map((spotlightCompany, index) => (
+              <div
+                key={index}
+                className="item w-[220px] h-[150px]  flex flex-col justify-between  absolute">
+                <div className="w-[220px] h-[100px] bg-white flex justify-center items-center">
+                  <img
+                    alt=""
+                    src={spotlightCompany.img}
+                    className="h-[50px] w-auto"
+                  />
+                </div>
+                <div className="w-[200px] h-[30px] font-medium text-[#444444] break-words">
+                  {spotlightCompany.name}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-        <div className="w-[5%] h-1/2 flex justify-start items-center ml-[13px] mb-[20px] text-[35px]">
-          <FontAwesomeIcon icon={faChevronRight} />
+        <div className="w-[7%] z-[10] h-1/2 flex justify-start items-center ml-[13px] mb-[20px] text-[35px]">
+          <FontAwesomeIcon onClick={nextButton} icon={faChevronRight} />
         </div>
       </div>
       {/* End Tuyển dụng nổi bật  */}
       {/*  [Blog Việc làm] */}
-      <div className="w-[70%] min-h-[600px] mt-[50px]  flex flex-col items-start">
+      <div className="w-[65%] min-h-[600px] mt-[50px]  flex flex-col items-start">
         <h2 className="text-[20px] font-semibold">Blog việc làm</h2>
         <div className="w-[100%]  flex  mt-[20px] flex-row flex-wrap justify-between items-start">
-          {blog.map((item, index) => (
+          {blogs.map((item, index) => (
             <div
               key={index}
               className="w-[19%] h-[450px]  flex flex-col justify-start mb-[20px] items-start relative hover:scale-[1.05]">

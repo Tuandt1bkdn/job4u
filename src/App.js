@@ -11,8 +11,14 @@ import Hiring from "./pages/Hiring";
 import AllJobs from "./pages/AllJob";
 import SavedJob from "../src/components/SavedJobFixedCSS";
 import Feature2 from "./pages/Feature2";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Context from "./store/Context";
+import { useContext } from "react";
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(Context);
   return (
     <Router>
       <div className="App">
@@ -22,6 +28,22 @@ function App() {
             element={
               <DefaultLayout>
                 <Home />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <DefaultLayout>
+                <Login />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <DefaultLayout>
+                <Signup />
               </DefaultLayout>
             }
           />

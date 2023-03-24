@@ -8,8 +8,8 @@ export function GetCensorJobs() {
   return http.get("/censorjob");
 }
 
-export function GetSavedJobs() {
-  return http.get("/savedjob");
+export function GetSavedJobs(username) {
+  return http.get(`/savedjob/${username}`);
 }
 
 export function GetOfficeJobs() {
