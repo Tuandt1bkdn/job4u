@@ -18,6 +18,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin as GoogleOauth } from "@react-oauth/google";
 
 //[HOOK]
 import { useEffect, useState } from "react";
@@ -224,6 +225,14 @@ function Home() {
           ))}
         </div>
       </div>{" "}
+      <GoogleOauth
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
       {/* End Blog Việc làm */}
     </div>
   );

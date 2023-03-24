@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Context from "../../store/Context";
 import { Fragment, useContext } from "react";
 import Tippy from "@tippyjs/react/headless";
-import { GoogleLogout, GoogleLogin } from "react-google-login";
-import { setLogin, setInfo } from "../../store/actions";
+// import { GoogleLogout, GoogleLogin } from "react-google-login";
+// import { setLogin, setInfo } from "../../store/actions";
+import { googleLogout } from "@react-oauth/google";
 
-const clientId =
-  "104319102501-h53nqs7514f4mh3sq3bhrr8fb7ahobsn.apps.googleusercontent.com";
+// const clientId =
+//   "104319102501-h53nqs7514f4mh3sq3bhrr8fb7ahobsn.apps.googleusercontent.com";
 
 function Navbar() {
   // eslint-disable-next-line no-unused-vars
@@ -30,20 +31,20 @@ function Navbar() {
     tag3.style.width = "23px";
   };
 
-  const onSuccess = (res) => {
-    console.log("Login Successful ! Current User : ", res.profileObj);
-    dispatch(setLogin(true));
-    dispatch(setInfo(res.profileObj));
-    console.log(state);
-  };
-  const onFailure = (res) => {
-    console.log("Login Failed ! ", res);
-  };
+  // const onSuccess = (res) => {
+  //   console.log("Login Successful ! Current User : ", res.profileObj);
+  //   dispatch(setLogin(true));
+  //   dispatch(setInfo(res.profileObj));
+  //   console.log(state);
+  // };
+  // const onFailure = (res) => {
+  //   console.log("Login Failed ! ", res);
+  // };
 
-  const onLogoutSuccess = () => {
-    dispatch(setLogin(false));
-    window.location.reload();
-  };
+  // const onLogoutSuccess = () => {
+  //   dispatch(setLogin(false));
+  //   window.location.reload();
+  // };
 
   return (
     <div className="w-full h-20 bg-[#212529] sticky top-0 flex flex-row justify-center items-center z-10">
@@ -81,42 +82,6 @@ function Navbar() {
           </ul>
         </div>
         <div className="w-[28%] h-full  flex flex-row justify-end items-center text-white text-[17px]">
-          <GoogleLogin
-            //className=" hover:opacity-[0.1]"
-            clientId={clientId}
-            // buttonText="Google"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            isSignedIn={true}
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                style={{
-                  width: "90%",
-                  height: "45px",
-                  borderRadius: "4px",
-                  border: "1px",
-                  borderColor: "#cbd5e1",
-                  borderStyle: "solid",
-                  //display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "black",
-                  marginTop: "30px",
-                  display: "none",
-                }}>
-                <img
-                  alt="logogoogle"
-                  src="https://img.icons8.com/color/512/google-logo.png"
-                  className="w-[30px] h-auto mx-[5px]"
-                />
-                <p className="mx-[5px] font-medium"> GOOGLE</p>
-              </button>
-            )}
-            cookiePolicy={"single_host_origin"}>
-            GOOGLE
-          </GoogleLogin>
           {state.login ? (
             <Fragment>
               <p>Xin chào, &nbsp;</p>
@@ -142,16 +107,22 @@ function Navbar() {
                       Đăng tuyển
                     </div>
 
-                    <GoogleLogout
-                      clientId={clientId}
-                      onLogoutSuccess={onLogoutSuccess}
-                      render={(renderProps) => (
-                        <div
-                          onClick={renderProps.onClick}
-                          className="w-[100%] pl-[20px] h-[20%]  text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
-                          Đăng xuất
-                        </div>
-                      )}></GoogleLogout>
+                    <div
+                      onClick={googleLogout()}
+                      className="w-[100%] pl-[20px] h-[20%]  text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                      Đăng xuất
+                    </div>
+
+                    {/* // <GoogleLogout
+                    //   clientId={clientId}
+                    //   onLogoutSuccess={onLogoutSuccess}
+                    //   render={(renderProps) => (
+                    //     <div
+                    //       onClick={renderProps.onClick}
+                    //       className="w-[100%] pl-[20px] h-[20%]  text-black text-[16px] border-[#ccc] flex justify-start items-center cursor-pointer hover:text-[#d34127] ">
+                    //       Đăng xuất
+                    //     </div>
+                //   )}></GoogleLogout> */}
                   </div>
                 )}>
                 <span>

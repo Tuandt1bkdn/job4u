@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import GoogleLogin from "react-google-login";
+
 import { useEffect, useContext } from "react";
+
 import { gapi } from "gapi-script";
 import Context from "../../store/Context";
 import { setLogin, setInfo } from "../../store/actions";
+import { useGoogleLogin } from "@react-oauth/google";
 
-const clientId =
-  "104319102501-h53nqs7514f4mh3sq3bhrr8fb7ahobsn.apps.googleusercontent.com";
+import axios from "axios";
+
+// const clientId =
+//   "104319102501-h53nqs7514f4mh3sq3bhrr8fb7ahobsn.apps.googleusercontent.com";
 
 function Login() {
   document.title = "Đăng nhập Job4U - Tìm kiếm việc làm";
@@ -16,20 +20,38 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const onSuccess = (res) => {
-    console.log("Login Successful ! Current User : ", res.profileObj);
-    dispatch(setLogin(true));
-    dispatch(setInfo(res.profileObj));
-    //console.log(state);
-    navigate("/");
-  };
-  const onFailure = (res) => {
-    console.log("Login Failed ! ", res);
-  };
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      var access_token = tokenResponse.access_token;
+      dispatch(setLogin(true));
+      axios
+        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        })
+        .then((res) => dispatch(setInfo(res.data)))
+        .catch((e) => {
+          throw e;
+        });
+      navigate("/");
+    },
+  });
+  // const onSuccess = (res) => {
+  //   console.log("Login Successful ! Current User : ", res.profileObj);
+  //   dispatch(setLogin(true));
+  //   dispatch(setInfo(res.profileObj));
+  //   //console.log(state);
+  //   navigate("/");
+  // };
+  // const onFailure = (res) => {
+  //   console.log("Login Failed ! ", res);
+  //};
   useEffect(() => {
     function start() {
       gapi.client.init({
-        clientId: clientId,
+        clientId:
+          "1027600566855-oiirdugelmvt0t1ur1a5hk0bt80fht24.apps.googleusercontent.com",
         scope: "",
       });
     }
@@ -66,41 +88,52 @@ function Login() {
           <p className="text-[#959393] ">HOẶC</p>
           <div className="w-[40%] h-[1px] bg-slate-300"></div>
         </div>
-        <GoogleLogin
-          //className=" hover:opacity-[0.1]"
-          clientId={clientId}
-          // buttonText="Google"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          isSignedIn={true}
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              style={{
-                width: "90%",
-                height: "45px",
-                borderRadius: "4px",
-                border: "1px",
-                borderColor: "#cbd5e1",
-                borderStyle: "solid",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "black",
-                marginTop: "30px",
-              }}>
-              <img
-                alt="logogoogle"
-                src="https://img.icons8.com/color/512/google-logo.png"
-                className="w-[30px] h-auto mx-[5px]"
-              />
-              <p className="mx-[5px] font-medium"> GOOGLE</p>
-            </button>
-          )}
-          cookiePolicy={"single_host_origin"}>
-          GOOGLE
-        </GoogleLogin>
+        <div
+          className="w-[90%] h-[45px] rounded-[4px] border border-[#cbd5e1] flex flex-row justify-center items-center text-black mt-[30px] "
+          onClick={googleLogin}>
+          <img
+            alt="logogoogle"
+            src="https://img.icons8.com/color/512/google-logo.png"
+            className="w-[30px] h-auto mx-[5px]"
+          />
+          <p className="mx-[5px] font-medium"> GOOGLE</p>
+        </div>
+        {/*        // <GoogleLogin
+        //   //className=" hover:opacity-[0.1]"
+        //   clientId={clientId}
+        //   // buttonText="Google"
+        //   onSuccess={onSuccess}
+        //   onFailure={onFailure}
+        //   isSignedIn={true}
+        //   render={(renderProps) => (
+        //     <button
+        //       onClick={renderProps.onClick}
+        //       style={{
+        //         width: "90%",
+        //         height: "45px",
+        //         borderRadius: "4px",
+        //         border: "1px",
+        //         borderColor: "#cbd5e1",
+        //         borderStyle: "solid",
+        //         display: "flex",
+        //         flexDirection: "row",
+        //         justifyContent: "center",
+        //         alignItems: "center",
+        //         color: "black",
+        //         marginTop: "30px",
+        //       }}>
+        //       <img
+        //         alt="logogoogle"
+        //         src="https://img.icons8.com/color/512/google-logo.png"
+        //         className="w-[30px] h-auto mx-[5px]"
+        //       />
+        //       <p className="mx-[5px] font-medium"> GOOGLE</p>
+        //     </button>
+        //   )}
+        //   cookiePolicy={"single_host_origin"}>
+        //   GOOGLE
+  // </GoogleLogin> 
+*/}
         <div className="w-[90%] h-[45px] mt-[10px] flex flex-row justify-center items-center">
           <div className="w-[25%] text-[#d34127] font-medium underline cursor-pointer">
             Đăng nhập
