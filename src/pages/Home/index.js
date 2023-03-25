@@ -13,22 +13,15 @@ import SearchBox from "../../components/SearchBox";
 import { blogs } from "../../static/blogs";
 
 //[Library]
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { GoogleLogin as GoogleOauth } from "@react-oauth/google";
 
 //[HOOK]
-import { useEffect, useState } from "react";
 
 function Home() {
-  // eslint-disable-next-line no-unused-vars
-  const [active, setActive] = useState(1);
+  document.title = "Job4U - Việc làm cho bạn";
+  // const [active, setActive] = useState(1);
 
   // eslint-disable-next-line no-unused-vars
-  const [spotlightCompanys, setSpotlightCompanys] = useState([
+  const spotlightCompanys = [
     {
       img: logo1,
       name: "TMA Tech Group",
@@ -61,7 +54,39 @@ function Home() {
       img: logo4,
       name: "Liên Việt Post Bank",
     },
-  ]);
+    {
+      img: logo1,
+      name: "TMA Tech Group",
+    },
+    {
+      img: logo2,
+      name: "mgm technology partners Vietnam",
+    },
+    {
+      img: logo3,
+      name: "NTT Data Viet Nam",
+    },
+    {
+      img: logo4,
+      name: "Liên Việt Post Bank",
+    },
+    {
+      img: logo1,
+      name: "TMA Tech Group",
+    },
+    {
+      img: logo2,
+      name: "mgm technology partners Vietnam",
+    },
+    {
+      img: logo3,
+      name: "NTT Data Viet Nam",
+    },
+    {
+      img: logo4,
+      name: "Liên Việt Post Bank",
+    },
+  ];
   const spotlightJobs = [
     {
       logo: logo1,
@@ -82,37 +107,6 @@ function Home() {
       salary: "7-10tr",
     },
   ];
-
-  const loadShow = () => {
-    var listItems = document.querySelectorAll(".item");
-    console.log(listItems);
-    let stt = 0;
-    for (var i = active + 1; i < 7; i++) {
-      stt++;
-      console.log(active);
-      console.log(i);
-      listItems[i].style.transform = `translateX(${256 * stt}px)`;
-      console.log(i);
-      listItems[active - 1].style.display = "none";
-      console.log(i);
-
-      listItems[active + 5].style.display = "none";
-      listItems[active + 6].style.display = "none";
-    }
-  };
-  //const [abc, setAbc] = useState(1);
-  const nextButton = () => {
-    setActive(active + 1);
-    // let item = spotlightCompanys[0];
-    // spotlightCompanys.shift();
-    // spotlightCompanys.push(item);
-    // setSpotlightCompanys(spotlightCompanys);
-    // loadShow();
-  };
-  useEffect(() => {
-    loadShow(active);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
 
   return (
     <div class=" bg-white min-h-screen flex flex-col items-center">
@@ -160,38 +154,38 @@ function Home() {
         </div>
       </div>
       {/* Tuyển dụng nổi bật  */}
-      <div className="w-full min-h-[250px] bg-[#efefef] mt-[40px] flex flex-row items-center justify-center">
-        <div className="w-[7%] h-1/2 flex justify-end items-center mb-[20px] text-[35px]">
-          <FontAwesomeIcon onClick={nextButton} icon={faChevronLeft} />
-        </div>
-        <div className="w-[65%] h-full flex flex-col justify-start items-start pb-[20px]">
-          <p className="text-[20px] font-semibold text-black mt-[30px]">
-            Nhà tuyển dụng nổi bật
-          </p>
-          <div
-            id="hrspotlight"
-            className="mt-[20px] h-[165px] flex flex-row justify-start ">
-            {spotlightCompanys.map((spotlightCompany, index) => (
-              <div
-                key={index}
-                className="item w-[220px] h-[150px]  flex flex-col justify-between  absolute">
-                <div className="w-[220px] h-[100px] bg-white flex justify-center items-center">
-                  <img
-                    alt=""
-                    src={spotlightCompany.img}
-                    className="h-[50px] w-auto"
-                  />
+      <div
+        id="slider"
+        className="w-[100vw] min-h-[250px] flex flex-row justify-start">
+        <div className="w-[17.5%]  bg-white z-[9999] "></div>
+        <div className="w-[65%] z-[9] min-h-[250px] bg-[#efefef] mt-[40px] flex flex-row items-center justify-center">
+          <div className="w-[100%] h-full flex flex-col justify-start items-start pb-[20px]">
+            <p className="text-[20px] font-semibold text-black mt-[30px]">
+              Nhà tuyển dụng nổi bật
+            </p>
+            <div
+              id="hrspotlight"
+              className="z-[99] mt-[20px] h-[165px] flex flex-row justify-start ">
+              {spotlightCompanys.map((spotlightCompany, index) => (
+                <div
+                  key={index}
+                  className="item z-[999] w-[220px] mr-[35px] h-[150px]  flex flex-col justify-between ">
+                  <div className="w-[220px]  h-[100px] bg-white flex justify-center items-center">
+                    <img
+                      alt=""
+                      src={spotlightCompany.img}
+                      className="h-[50px] w-auto"
+                    />
+                  </div>
+                  <div className="w-[200px] h-[30px] font-medium text-[#444444] break-words">
+                    {spotlightCompany.name}
+                  </div>
                 </div>
-                <div className="w-[200px] h-[30px] font-medium text-[#444444] break-words">
-                  {spotlightCompany.name}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        <div className="w-[7%] z-[10] h-1/2 flex justify-start items-center ml-[13px] mb-[20px] text-[35px]">
-          <FontAwesomeIcon onClick={nextButton} icon={faChevronRight} />
-        </div>
+        <div className="w-[17.5%]  bg-white z-[9999] "></div>
       </div>
       {/* End Tuyển dụng nổi bật  */}
       {/*  [Blog Việc làm] */}
@@ -225,17 +219,40 @@ function Home() {
           ))}
         </div>
       </div>{" "}
-      <GoogleOauth
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
       {/* End Blog Việc làm */}
     </div>
   );
 }
 
 export default Home;
+
+// const loadShow = () => {
+//   var listItems = document.querySelectorAll(".item");
+//   console.log(listItems);
+//   let stt = 0;
+//   for (var i = active + 1; i < 7; i++) {
+//     stt++;
+//     console.log(active);
+//     console.log(i);
+//     listItems[i].style.transform = `translateX(${256 * stt}px)`;
+//     console.log(i);
+//     // listItems[active - 1].style.display = "none";
+//     // console.log(i);
+
+//     // listItems[active + 5].style.display = "none";
+//     // listItems[active + 6].style.display = "none";
+//   }
+// };
+//const [abc, setAbc] = useState(1);
+// const nextButton = () => {
+//   setActive(active + 1);
+//   // let item = spotlightCompanys[0];
+//   // spotlightCompanys.shift();
+//   // spotlightCompanys.push(item);
+//   // setSpotlightCompanys(spotlightCompanys);
+//   // loadShow();
+// };
+// useEffect(() => {
+//   loadShow(active);
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+// }, [active]);

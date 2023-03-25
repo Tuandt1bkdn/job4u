@@ -4,6 +4,8 @@ import JobPageContent from "../../components/JobPageContent";
 import SearchBox from "../../components/SearchBox";
 
 function MarketingPage() {
+  document.title = "Job4U - Việc làm Marketing";
+
   const [marketingJobs, setMarketingJobs] = useState([]);
 
   useEffect(() => {

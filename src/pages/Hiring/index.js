@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 
 function Hiring() {
+  document.title = "Job4U - Đăng tuyển công việc";
+
   const [companyName, setCompanyName] = useState("");
   const [hrName, setHrName] = useState("");
   const [phone, setPhone] = useState("");

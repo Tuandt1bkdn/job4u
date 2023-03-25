@@ -6,6 +6,7 @@ import JobPageContent from "../../components/JobPageContent";
 import { GetOfficeJobs } from "../../API/Services/GET";
 
 function OfficePage() {
+  document.title = "Job4U - Việc làm văn phòng";
   const [job, setJob] = useState([]);
 
   // const [savedJobs, setSavedJob] = useState([]);

@@ -1,17 +1,36 @@
+html::-webkit-scrollbar{
+    display: none;
+}
 #spotlightJob>div:last-child{
     border-bottom: 1px solid #e5e7eb;
 }
+/* #slider::after{
+    z-index: 999999;
+    content: "";
+    width: 0px;
+    height: 30px;
+    background-color: red;
+    display: block;
+    position: relative;
+    right: 0px;
+} */
 #hrspotlight{
-    width: 1200px;
-    /* background-color: red; */
-    /* width: max-content; */
-    overflow:hidden;
-    /* margin: 24px auto; */
+    width: 1250px;
+    /* overflow: hidden; */
+    animation: autoSlider 12s linear infinite;
 }
 #hrspotlight::-webkit-scrollbar{
     display: none;
 }
 
-.item{
+/* .item{
     transition: 0.5s;
+} */
+@keyframes autoSlider {
+    from {
+        transform: translate(0);
+    }
+    to {
+        transform: translateX(-2040px);
+    }
 }

@@ -6,6 +6,7 @@ import SearchBox from "../../components/SearchBox";
 import Context from "../../store/Context";
 
 function AllJobs() {
+  document.title = "Job4U - Tất cả việc làm";
   // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useContext(Context);
   console.log("state", state);
